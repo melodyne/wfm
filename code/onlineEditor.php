@@ -11,12 +11,10 @@ class onlineEditor{
     public $filePath = null;
     //设置过滤信息
     private $fileFilter = array(
-        'onlineEditor.php',
-        'viewEditor.html',
-        'index.php',
         '.',
         '..',
-        '.svn'
+        '.svn',
+        '.git'
     );
 
     //构造函数必须是私有的在单例设计模式中
