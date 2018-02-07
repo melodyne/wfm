@@ -1,5 +1,5 @@
 # file_manager
-#####原生PHP在线文件管理器，原生PHP在线文件编辑器
+####原生PHP在线文件管理器，原生PHP在线文件编辑器
 
 - 支持浏览文件目录
 - 支持在线浏览文件内容
@@ -10,4 +10,8 @@
 - 网站在线Log日志，查看和管理
 - 在线修改代码
 - 单纯文件管理
+
+
+**展示效果图：**
+
 ![效果展示](https://github.com/melodyne/file_manager/blob/master/eg.gif?raw=true)
