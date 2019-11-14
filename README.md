@@ -21,7 +21,7 @@
 
 composer 导入
 ```sh
-composer update melodyne/wfm
+composer install melodyne/wfm
 ```
 使用示例
 ```PHP
