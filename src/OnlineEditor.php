@@ -64,7 +64,7 @@ class OnlineEditor{
 
         else{
             echo "<a href = 'index.php' >点此返回</a>";
-            die("文件已经存在");
+            die("文件已经存在,".$filename);
         }
 
     }
