@@ -77,7 +77,7 @@ class ViewFile
 
 
         //引入界面
-        require "./viewEditor.html";
+        require __DIR__."/viewEditor.html";
 
     }
 }
