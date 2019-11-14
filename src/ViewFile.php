@@ -18,9 +18,6 @@ class ViewFile
         if (isset($_GET['dir'])) $dirPath = $_GET['dir'];
         $action = null;
 
-        //引入文件
-        require "./OnlineEditor.php";
-
         //获得onlineEditor对象
         $onlineEditor = new OnlineEditor($dirPath);
         $fileMes = $onlineEditor->main();
