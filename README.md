@@ -19,7 +19,15 @@
 #### 使用说明
 原生php开发，代码量少，无其他依赖，容易集成到自己项目中，比如你项目是ThinkPHP,CI,Yii等框架开发，都可以很轻松的集成到自己项目中，不用时直接删除即可。
 
-
+composer 导入
+```sh
+composer update melodyne/wfm
+```
+使用示例
+```PHP
+ $viewFile = new \melodyne\wfm\ViewFile('你的文件路径');
+ $viewFile->showList();
+```
 
 **运行效果**
 
