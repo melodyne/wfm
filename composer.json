@@ -1,0 +1,20 @@
+{
+    "name": "melodyne/wfm",
+    "description": "Online file view management",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chenwanzhou",
+            "email": "chenwanzhou@daishujiankang.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "melodyne\\wfm\\": "src/"
+        }
+    }
+}

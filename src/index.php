@@ -1,14 +1,13 @@
 <?php
-
 	$dirPath ='../../runtime/log';
 	if(isset($_GET['dir']))$dirPath = $_GET['dir'];
 	$action = null;
 
 	//引入文件
-	require "./onlineEditor.php";
+	require "./OnlineEditor.php";
 
 	//获得onlineEditor对象
-	$onlineEditor = new onlineEditor($dirPath);
+	$onlineEditor = new OnlineEditor($dirPath);
 	$fileMes = $onlineEditor->main();
 
 	//处理文件路径

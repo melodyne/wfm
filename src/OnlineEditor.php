@@ -5,7 +5,9 @@
    使用工厂设计模式，MVC实现
 */
 
-class onlineEditor{
+namespace melodyne\wfm;
+
+class OnlineEditor{
 
     //设置全局变量路径
     public $filePath = null;
