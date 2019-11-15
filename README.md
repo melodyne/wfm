@@ -21,8 +21,9 @@
 
 composer 导入
 ```sh
-composer install melodyne/wfm
+composer require melodyne/wfm
 ```
+
 使用示例
 ```PHP
  $viewFile = new \melodyne\wfm\ViewFile('你的文件路径');
