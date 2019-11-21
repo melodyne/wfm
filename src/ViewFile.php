@@ -75,6 +75,13 @@ class ViewFile
             echo "<script>location.href = 'index.php';</script>";
         }
 
+        // url路径处理
+        $requestUri = $_SERVER["REQUEST_URI"];
+        if(strstr($requestUri,'?')){
+            $requestUri .= '&';
+        }else{
+            $requestUri .= '?';
+        }
 
         //引入界面
         require __DIR__."/viewEditor.html";

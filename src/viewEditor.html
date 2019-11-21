@@ -86,12 +86,12 @@
 					<td><?php echo $v['fileSize'];?></td>
 					<td><?php echo date("Y-m-d",$v['filemtime']);?></td>
 					<?php if($v['fileType']=='dir'){?>
-					<td><a href=index.php?action=open&dir=<?php echo $dirPath.'/'.$v['fileName'];?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >打开</a></td>
+					<td><a href=<?= $requestUri ?>action=open&dir=<?php echo $dirPath.'/'.$v['fileName'];?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >打开</a></td>
 					<?php }else{?>
-					<td><a href=index.php?action=look&dir=<?php echo $dirPath;?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >查看</a></td>
+					<td><a href=<?= $requestUri ?>action=look&dir=<?php echo $dirPath;?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >查看</a></td>
 					<?php } ?>
 					<!--
-					<td><a href=index.php?action=del&filename=<?php echo $v['fileName']; ?> >删除</a></td>
+					<td><a href=<?= $requestUri ?>action=del&filename=<?php echo $v['fileName']; ?> >删除</a></td>
 					-->
 				</tr>
 			<?php } ?>
