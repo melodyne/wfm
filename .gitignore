@@ -1,3 +1,5 @@
 .idea/
 /vendor/
 /logs/
+.htaccess
+nginx.htaccess
