@@ -8,5 +8,5 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$viewFile = new \melodyne\wfm\ViewFile('你的文件路径');
+$viewFile = new \melodyne\wfm\ViewFile('logs');
 $viewFile->showList();
