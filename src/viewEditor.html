@@ -56,7 +56,6 @@
         }
 
         .createFile {
-            width: 500px;
             height: auto;
             margin: 0 auto;
             margin-bottom: 20px;
@@ -73,7 +72,7 @@
     </style>
     <script type="text/javascript">
         function backIndex() {
-            location.href = 'index.php';
+            location.href = '<?= $requestUri ?>';
         }
 
         function clearTxt() {
@@ -96,15 +95,17 @@
         <?php if(array_key_exists('type', $_GET)&&$_GET['type']=='file')echo rtrim($dirPath,'/').'/',$_GET['filename'];else echo $dirPath; ?>
     </div>
     <br/>
-    <?php if($action == 'updata'){?>
+    <?php if($action == 'update'){?>
     <div class="updata" style="width: 998px;">
-        <form action="index.php" method="post" name="myform">
+        <form action="<?= $requestUri ?>" method="post" name="myform">
             <textarea id="txt" style="padding: 10px;" name="filecontent"><?php echo $fileContent; ?></textarea>
             <input type="hidden" value="<?php echo $_GET['filename']; ?>" name="filename"/>
-            <!--
-            <input class="btn" style="float:right;margin-left:20px;" onclick="clearTxt()" type="button" value="清空" />
-            <a href="index.php"><input class="btn" style="float:right;" type="submit" value="保存" /></a>
-            -->
+
+            <div style="margin-top: 20px">
+                <input class="btn" style="float:right;margin-left:20px;" onclick="clearTxt()" type="button" value="清空"/>
+                <input class="btn" style="float:right;" type="submit" value="保存"/>
+            </div>
+
         </form>
     </div>
     <br/><br/>
@@ -112,15 +113,13 @@
     <pre style="font-size: 16px;background: white;padding: 15px"><?php echo $fileContent ?></pre>
     <?php }else{ ?>
     <!--创建文件-->
-    <!--
-<div class="createFile">
-    <form action="index.php" method="post" name="myform2">
+<div class="createFile" style="text-align: right;padding-right: 0;">
+    <form action="<?= $requestUri ?>" method="post" name="myform2">
         <input  type="hidden" name="action" value="create" />
-        <input style="width:200px;height:30px;" type="text" name="filename" />
+        <input style="width:200px;height:30px;padding: 5px;" type="text" name="filename" />
         <input class="btn" type="submit" value="创建" />
     </form>
 </div>
--->
     <div class="fileMes" style="width:1000px;">
         <table style="width:100%;height:auto;">
             <tr style="background:#abcdef;">
@@ -140,16 +139,15 @@
                 <td><?php echo $v['fileType'];?></td>
                 <td><?php echo $v['fileSize'];?></td>
                 <td><?php echo date("Y-m-d",$v['filemtime']);?></td>
-                <?php if($v['fileType']=='dir'){?>
-                <td><a href=<?= $requestUri ?>action=open&dir=<?php echo urlencode($dirPath).'/'.$v['fileName'];?>
-                    &type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >打开</a></td>
-                <?php }else{?>
-                <td><a href=<?= $requestUri ?>action=look&dir=<?php echo urlencode($dirPath);?>
-                    &type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?> >查看</a></td>
-                <?php } ?>
-                <!--
-                <td><a href=<?= $requestUri ?>action=del&filename=<?php echo $v['fileName']; ?> >删除</a></td>
-                -->
+                <td>
+                    <?php if($v['fileType']=='dir'){?>
+                    <a href="<?= $requestUri ?>action=open&dir=<?php echo urlencode($dirPath).'/'.$v['fileName'];?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">打开</a>
+                    <?php }else{?>
+                    <a href="<?= $requestUri ?>action=look&dir=<?php echo urlencode($dirPath);?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">查看</a>
+                    <a href="<?= $requestUri ?>action=update&dir=<?php echo urlencode($dirPath);?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">编辑</a>
+                    <?php } ?>
+                    <a href="<?= $requestUri ?>action=del&filename=<?php echo $v['fileName']; ?>">删除</a>
+                </td>
             </tr>
             <?php } ?>
         </table>

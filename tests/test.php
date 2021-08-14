@@ -6,7 +6,7 @@
  * Time: 17:31
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$viewFile = new \melodyne\wfm\ViewFile('logs');
+$viewFile = new \melodyne\wfm\ViewFile('../logs');
 $viewFile->showList();

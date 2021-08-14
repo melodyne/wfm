@@ -15,7 +15,9 @@ class ViewFile
     {
 
         $dirPath = $this->dirPath;
-        if (isset($_GET['dir'])) $dirPath = $_GET['dir'];
+        if (isset($_GET['dir'])) {
+            $dirPath = $_GET['dir'];
+        }
         $action = null;
 
         //获得onlineEditor对象
@@ -25,8 +27,9 @@ class ViewFile
         //处理文件路径
         function subFilePath($dirPath, $filename)
         {
-            // echo $dirPath . $filename;
-            return $dirPath . $filename;
+            $dirPath = rtrim($dirPath,'/');
+            $dirPath = rtrim($dirPath,'\\');
+            return $dirPath .'/'. $filename;
         }
 
         //初始化
@@ -38,14 +41,14 @@ class ViewFile
                 case 'look':
                     $action = 'look';
                     break;
-                case 'updata':
-                    $action = 'updata';
+                case 'update':
+                    $action = 'update';
                     break;
                 case 'del':
                     $onlineEditor->delFile(subFilePath($dirPath, $_GET['filename']));
                     $action = 'del';
                     echo subFilePath($dirPath, $_GET['filename']);
-                    echo "<script>location.href = 'index.php';</script>";
+                    echo "<script>self.location=document.referrer;</script>";
                     break;
             }
         } else {
@@ -56,23 +59,22 @@ class ViewFile
             switch ($_POST['action']) {
                 case 'create':
                     $onlineEditor->createFile(subFilePath($dirPath, $_POST['filename']));
-                    echo "<script>location.href = 'index.php';</script>";
+                    echo "<script>location.href = self.location=document.referrer;</script>";
                     break;
             }
         }
 
         //获取文件内容
-        if (array_key_exists('filename', $_GET) && ($_GET['action'] == 'updata' || $_GET['action'] == 'look')) {
+        if (array_key_exists('filename', $_GET) && ($_GET['action'] == 'update' || $_GET['action'] == 'look')) {
             $root = subFilePath(rtrim($dirPath, '/') . '/', $_GET['filename']);
             $fileContent = $onlineEditor->getContent($root);
-            //echo "<pre style='font-size: 16px'>$fileContent</pre>";die();
-        } else
-            $fileContent = "坚持就是胜利";
+        } else {
+            $fileContent = "文件路径错误，或操作类型不存在";
+        }
 
         if (array_key_exists('filecontent', $_POST)) {
-            // var_dump($_POST);
             $onlineEditor->putContent(subFilePath($dirPath, $_POST['filename']), $_POST['filecontent']);
-            echo "<script>location.href = 'index.php';</script>";
+            echo "<script>self.location=document.referrer+'&action=look';</script>";
         }
 
         // url路径处理
