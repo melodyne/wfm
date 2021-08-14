@@ -37,7 +37,6 @@ composer require melodyne/wfm
 * update 修改编辑文件权限
 * delete 删除文件权限
 
-
 **运行效果**
 
 ![效果展示](https://github.com/melodyne/file_manager/blob/master/eg.gif?raw=true)
