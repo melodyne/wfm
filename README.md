@@ -26,9 +26,17 @@ composer require melodyne/wfm
 
 使用示例
 ```PHP
- $viewFile = new \melodyne\wfm\ViewFile('你的文件路径');
- $viewFile->showList();
+ $viewFile = new \melodyne\wfm\ViewFile([
+     'sys_name'=>'在线log日志系统',
+     'dir_path'=>'../logs',
+     'file_action'=>['create','update','delete'] // 创建，修改，删除
+ ]);
 ```
+权限 `file_action` 的值为，不要该权限则不填
+* create 创建文件权限
+* update 修改编辑文件权限
+* delete 删除文件权限
+
 
 **运行效果**
 

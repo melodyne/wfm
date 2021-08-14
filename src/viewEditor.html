@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>在线log日志</title>
+    <title><?= $sysName ?></title>
     <style>
         * {
             margin: 0;
@@ -86,7 +86,7 @@
 <body bgcolor="#CCCCCC">
 <div style="width:1000px;height:auto;background:#CCCCCC;margin:0 auto;">
     <br/><br/>
-    <h2 align="center" style="font-size:26px;font-weight:bold;">在线log日志系统</h2>
+    <h2 align="center" style="font-size:26px;font-weight:bold;"><?= $sysName ?></h2>
     <br/><br/>
     <hr/>
     <br/>
@@ -112,14 +112,16 @@
     <?php }elseif($action == 'look'){ ?>
     <pre style="font-size: 16px;background: white;padding: 15px"><?php echo $fileContent ?></pre>
     <?php }else{ ?>
+    <?php if(in_array('create',$fileAction)){ ?>
     <!--创建文件-->
-<div class="createFile" style="text-align: right;padding-right: 0;">
-    <form action="<?= $requestUri ?>" method="post" name="myform2">
-        <input  type="hidden" name="action" value="create" />
-        <input style="width:200px;height:30px;padding: 5px;" type="text" name="filename" />
-        <input class="btn" type="submit" value="创建" />
-    </form>
-</div>
+    <div class="createFile" style="text-align: right;padding-right: 0;">
+        <form action="<?= $requestUri ?>" method="post" name="myform2">
+            <input type="hidden" name="action" value="create"/>
+            <input style="width:200px;height:30px;padding: 5px;border: 1px solid #bbb" type="text" name="filename"/>
+            <input class="btn" type="submit" value="创建"/>
+        </form>
+    </div>
+    <?php } ?>
     <div class="fileMes" style="width:1000px;">
         <table style="width:100%;height:auto;">
             <tr style="background:#abcdef;">
@@ -140,13 +142,17 @@
                 <td><?php echo $v['fileSize'];?></td>
                 <td><?php echo date("Y-m-d",$v['filemtime']);?></td>
                 <td>
-                    <?php if($v['fileType']=='dir'){?>
+                <?php if($v['fileType']=='dir'){?>
                     <a href="<?= $requestUri ?>action=open&dir=<?php echo urlencode($dirPath).'/'.$v['fileName'];?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">打开</a>
-                    <?php }else{?>
+                <?php }else{?>
                     <a href="<?= $requestUri ?>action=look&dir=<?php echo urlencode($dirPath);?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">查看</a>
+                    <?php if(in_array('update',$fileAction)){ ?>
                     <a href="<?= $requestUri ?>action=update&dir=<?php echo urlencode($dirPath);?>&type=<?php echo $v['fileType'];?>&filename=<?php echo $v['fileName'];?>">编辑</a>
                     <?php } ?>
-                    <a href="<?= $requestUri ?>action=del&filename=<?php echo $v['fileName']; ?>">删除</a>
+                <?php } ?>
+                    <?php if(in_array('delete',$fileAction)){ ?>
+                    <a href="<?= $requestUri ?>action=delete&filename=<?php echo $v['fileName']; ?>">删除</a>
+                    <?php } ?>
                 </td>
             </tr>
             <?php } ?>

@@ -4,17 +4,35 @@ namespace melodyne\wfm;
 
 class ViewFile
 {
+    private $systemName = '在线log日志系统';
+    private $fileAction = array('open','look');
+
     protected $dirPath = '';
 
-    function __construct($dirPath)
+
+    function __construct($config)
     {
-        $this->dirPath = $dirPath;
+        if(is_string($config)){
+            $this->dirPath = $config;
+        }else{
+            if(empty($config['dir_path'])){
+                die('请配置要读取的文件夹路径');
+            }
+            $this->dirPath = $config['dir_path'];
+            if(isset($config['sys_name']) && $config['sys_name']){
+                $this->systemName = $config['sys_name'];
+            }
+            if(isset($config['file_action']) && $config['file_action']){
+                $this->fileAction = array_merge($this->fileAction,$config['file_action']);
+            }
+        }
     }
 
     function showList()
     {
-
+        $sysName = $this->systemName;
         $dirPath = $this->dirPath;
+        $fileAction = $this->fileAction;
         if (isset($_GET['dir'])) {
             $dirPath = $_GET['dir'];
         }
@@ -34,6 +52,10 @@ class ViewFile
 
         //初始化
         if (array_key_exists('action', $_GET)) {
+            if(!in_array($_GET['action'],$fileAction)){
+                echo "<a href=\"javascript:\" onclick=\"self.location=document.referrer;\" >点此返回</a>";
+                die('无操作权限');
+            }
             switch ($_GET['action']) {
                 case 'open':
                     $action = 'open';
@@ -44,9 +66,9 @@ class ViewFile
                 case 'update':
                     $action = 'update';
                     break;
-                case 'del':
+                case 'delete':
                     $onlineEditor->delFile(subFilePath($dirPath, $_GET['filename']));
-                    $action = 'del';
+                    $action = 'delete';
                     echo subFilePath($dirPath, $_GET['filename']);
                     echo "<script>self.location=document.referrer;</script>";
                     break;
@@ -56,6 +78,10 @@ class ViewFile
         }
 
         if (array_key_exists('action', $_POST)) {
+            if(!in_array($_POST['action'],$fileAction)){
+                echo "<a href=\"javascript:\" onclick=\"self.location=document.referrer;\" >点此返回</a>";
+                die('无操作权限');
+            }
             switch ($_POST['action']) {
                 case 'create':
                     $onlineEditor->createFile(subFilePath($dirPath, $_POST['filename']));

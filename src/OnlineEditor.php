@@ -90,6 +90,7 @@ class OnlineEditor
         if (file_exists($filename)) {
             if(is_dir($filename)){
                 if(!rmdir($filename)){
+                    echo "<a href=\"javascript:\" onclick=\"self.location=document.referrer;\" >点此返回</a>";
                     echo '删除失败，可能文件下有文件';
                     die();
                 }
