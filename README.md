@@ -29,10 +29,10 @@ composer require melodyne/wfm
  $viewFile = new \melodyne\wfm\ViewFile([
      'sys_name'=>'在线log日志系统',
      'dir_path'=>'../logs',
-     'file_action'=>['create','update','delete'] // 创建，修改，删除
+     'file_action'=>['create','update','delete'] // 创建，修改，删除（都不要的话，留空即可）
  ]);
  $viewFile->showList();
- exit();
+ exit(); // 中断后续，根据自己框架情况决定是否需要
 ```
 权限 `file_action` 的值为，不要该权限则不填
 * create 创建文件权限
