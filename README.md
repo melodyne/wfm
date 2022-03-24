@@ -31,6 +31,8 @@ composer require melodyne/wfm
      'dir_path'=>'../logs',
      'file_action'=>['create','update','delete'] // 创建，修改，删除
  ]);
+ $viewFile->showList();
+ exit();
 ```
 权限 `file_action` 的值为，不要该权限则不填
 * create 创建文件权限
